@@ -1,22 +1,22 @@
 [project]
-name = "nonebot-plugin-example"
-dynamic = ["version"]
-description = "Template plugin project"
-authors = [{ name = "student_2333", email = "lgc2333@126.com" }]
-dependencies = ["nonebot2>=2.3.1", "nonebot-plugin-alconna>=0.48.0"]
+name = "nonebot-plugin-guesswho"
+dynamic = ["0.1.0"]
+description = "NoneBot2的猜角色小游戏插件"
+authors = [{ name = "WuSheng125", email = "657760184@qq.com" }]
+dependencies = ["nonebot2>=2.3.3", "nonebot-plugin-alconna>=0.52.2"]
 requires-python = ">=3.9,<4.0"
 readme = "README.md"
 license = { text = "MIT" }
 
 [project.urls]
-homepage = "https://github.com/owner/nonebot-plugin-example"
+homepage = "https://github.com/WuSheng125/nonebot-plugin-guesswho"
 
 [tool.pdm.build]
 includes = []
 
 [tool.pdm.version]
 source = "file"
-path = "nonebot_plugin_example/__init__.py"
+path = "nonebot_plugin_guesswho/__init__.py"
 
 [build-system]
 requires = ["pdm-backend"]

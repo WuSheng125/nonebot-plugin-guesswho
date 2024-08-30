@@ -10,7 +10,7 @@
   <img src="https://raw.githubusercontent.com/lgc-NB2Dev/readme/main/template/plugin.svg" alt="NoneBotPluginText">
 </p>
 
-# nonebot-plugin-example
+# nonebot-plugin-guesswho
 
 _✨ NoneBot 插件简单描述 ✨_
 
@@ -34,22 +34,22 @@ _✨ NoneBot 插件简单描述 ✨_
   <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/lgc-NB2Dev/readme/main/template/pyd-v1-or-v2.json" alt="Pydantic Version 1 Or 2" >
 </a>
 <a href="./LICENSE">
-  <img src="https://img.shields.io/github/license/owner/nonebot-plugin-example.svg" alt="license">
+  <img src="https://img.shields.io/github/license/WuSheng125/nonebot-plugin-guesswho.svg" alt="license">
 </a>
-<a href="https://pypi.python.org/pypi/nonebot-plugin-example">
-  <img src="https://img.shields.io/pypi/v/nonebot-plugin-example.svg" alt="pypi">
+<a href="https://pypi.python.org/pypi/nonebot-plugin-guesswho">
+  <img src="https://img.shields.io/pypi/v/nonebot-plugin-guesswho.svg" alt="pypi">
 </a>
-<a href="https://pypi.python.org/pypi/nonebot-plugin-example">
-  <img src="https://img.shields.io/pypi/dm/nonebot-plugin-example" alt="pypi download">
+<a href="https://pypi.python.org/pypi/nonebot-plugin-guesswho">
+  <img src="https://img.shields.io/pypi/dm/nonebot-plugin-guesswho" alt="pypi download">
 </a>
 
 <br />
 
-<a href="https://registry.nonebot.dev/plugin/nonebot-plugin-example:nonebot_plugin_example">
-  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin%2Fnonebot-plugin-example" alt="NoneBot Registry">
+<a href="https://registry.nonebot.dev/plugin/nonebot-plugin-guesswho:nonebot_plugin_guesswho">
+  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin%2Fnonebot-plugin-guesswho" alt="NoneBot Registry">
 </a>
-<a href="https://registry.nonebot.dev/plugin/nonebot-plugin-example:nonebot_plugin_example">
-  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-example" alt="Supported Adapters">
+<a href="https://registry.nonebot.dev/plugin/nonebot-plugin-guesswho:nonebot_plugin_guesswho">
+  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-guesswho" alt="Supported Adapters">
 </a>
 
 </div>
@@ -79,7 +79,7 @@ _✨ NoneBot 插件简单描述 ✨_
 在 nonebot2 项目的根目录下打开命令行, 输入以下指令即可安装
 
 ```bash
-nb plugin install nonebot-plugin-example
+nb plugin install nonebot-plugin-guesswho
 ```
 
 </details>
@@ -92,7 +92,7 @@ nb plugin install nonebot-plugin-example
 <summary>pip</summary>
 
 ```bash
-pip install nonebot-plugin-example
+pip install nonebot-plugin-guesswho
 ```
 
 </details>
@@ -100,7 +100,7 @@ pip install nonebot-plugin-example
 <summary>pdm</summary>
 
 ```bash
-pdm add nonebot-plugin-example
+pdm add nonebot-plugin-guesswho
 ```
 
 </details>
@@ -108,7 +108,7 @@ pdm add nonebot-plugin-example
 <summary>poetry</summary>
 
 ```bash
-poetry add nonebot-plugin-example
+poetry add nonebot-plugin-guesswho
 ```
 
 </details>
@@ -116,7 +116,7 @@ poetry add nonebot-plugin-example
 <summary>conda</summary>
 
 ```bash
-conda install nonebot-plugin-example
+conda install nonebot-plugin-guesswho
 ```
 
 </details>
@@ -127,7 +127,7 @@ conda install nonebot-plugin-example
 [tool.nonebot]
 plugins = [
     # ...
-    "nonebot_plugin_example"
+    "nonebot_plugin_guesswho"
 ]
 ```
 
