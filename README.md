@@ -54,21 +54,10 @@ _✨ NoneBot 插件简单描述 ✨_
 
 </div>
 
-这是一个 nonebot2 插件项目的模板库, 你可以直接使用本模板创建你的 nonebot2 插件项目的仓库
-
-模板库使用方法:
-
-1. 点击仓库中的 `Use this template` 按钮, 输入仓库名与描述, 点击 `Create repository from template` 创建仓库
-2. 全局替换 `owner` 为仓库所有者 ID;  
-   全局替换 `nonebot-plugin-example` 为插件名;  
-   全局替换 `nonebot_plugin_example` 为包名;  
-   修改 python 徽标中的版本为你插件的运行所需版本;  
-   替换 WakaTime 的徽标
-3. 修改 `README.md` 中的插件名和插件描述, 并在下方填充相应的内容
 
 ## 📖 介绍
 
-这里是插件的详细介绍部分
+基于NoneBot2的一个猜角色小游戏插件
 
 ## 💿 安装
 
@@ -157,20 +146,12 @@ plugins = [
 
 ## 📞 联系
 
-QQ：3076823485  
-Telegram：[@lgc2333](https://t.me/lgc2333)  
-吹水群：[1105946125](https://jq.qq.com/?_wv=1027&k=Z3n1MpEp)  
-邮箱：<lgc2333@126.com>
+QQ：657760184  
+邮箱：<wusheng16080@gmail.com>
 
 ## 💡 鸣谢
 
 如果有要鸣谢的人的话
-
-## 💰 赞助
-
-**[赞助我](https://blog.lgc2333.top/donate)**
-
-感谢大家的赞助！你们的赞助将是我继续创作的动力！
 
 ## 📝 更新日志
 
