@@ -11,6 +11,7 @@ from nonebot.rule import to_me, is_type
 from nonebot_plugin_waiter import waiter
 
 from .config import config
+from .controller import controller
 
 PICPATH = config.guesswho_picpath
 RETRIES = config.guesswho_max_retries
@@ -22,10 +23,21 @@ async def game_process(
         game_type: str,
         tag: str
 ):
+    """游戏主进程"""
     group_id = event.get_session_id().split("_")[1]
-    # user_id = event.get_session_id().split("_")[2]
+    user_id = event.get_session_id().split("_")[2]
+
+    cd = controller.update(user_id, group_id, event.time)
+    if cd > 0:
+        await matcher.finish(f"让人家歇会儿！冷却还有{cd}秒")
+    elif cd == -1:
+        await matcher.finish("有正在进行中的游戏哦！")
+    elif cd == -2:
+        return
+
     if controller.start(group_id):
         await matcher.finish("有正在进行中的游戏哦！")
+
     names, full_img, cropped_img = get_randchar(group_id, game_type, tag)
     if names is None:
         controller.end(group_id)
@@ -37,6 +49,7 @@ async def game_process(
 
     @waiter(waits=["message"], block=True, rule=to_me() & is_type(GroupMessageEvent), keep_session=False)
     async def listen(_event: GroupMessageEvent):
+        """等待群友回复消息"""
         if _event.get_session_id().split("_")[1] != group_id:
             return
         text = _event.get_message().extract_plain_text()
@@ -67,6 +80,7 @@ async def game_process(
 
 
 def get_alpha_ratio(img: ImageFile):
+    """获取不透明部分占比"""
     datas = img.getdata()
     non_transparent_pixels = len([pixel for pixel in datas if pixel[3] != 0])
     total_pixels = img.size[0] * img.size[1]
@@ -75,6 +89,7 @@ def get_alpha_ratio(img: ImageFile):
 
 
 def get_randchar(group_id, game_type: str, tag: str = ''):
+    """获取指定游戏的随机角色"""
     path = PICPATH[game_type]
     json_path = Path(__file__).parent / 'data' / (game_type + '_data.json')
     with open(json_path, 'r', encoding='utf-8') as file:
@@ -102,23 +117,3 @@ def get_randchar(group_id, game_type: str, tag: str = ''):
             cropped_img_path = Path(__file__).parent / 'data' / (group_id + '_tmp.png')
             cropped_img.save(cropped_img_path)
             return data[selected_char]['names'], selected_img_path, cropped_img_path
-
-
-class Controller:
-    def __init__(self):
-        self.status = {}
-
-    def start(self, group_id):
-        if self.status.get(group_id):
-            return True
-        else:
-            self.status[group_id] = True
-            return False
-
-    def end(self, group_id):
-        cropped_img_path = Path(__file__).parent / 'data' / (group_id + '_tmp.png')
-        os.remove(cropped_img_path)
-        self.status[group_id] = False
-
-
-controller = Controller()

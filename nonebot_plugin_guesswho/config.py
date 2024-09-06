@@ -8,6 +8,7 @@ from pydantic import BaseModel
 class ConfigModel(BaseModel):
     command_start: Set[str] = ['/']
 
+    guesswho_cooldow: int = 600
     guesswho_max_retries: int = 3
     guesswho_azurlane_enabled: bool = True
     guesswho_arknights_enabled: bool = True
