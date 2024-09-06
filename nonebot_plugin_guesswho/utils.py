@@ -5,22 +5,23 @@ import math
 from PIL import Image, ImageFile
 from pathlib import Path
 
-from nonebot.adapters.onebot.v11 import Message, Event, MessageSegment, PrivateMessageEvent
+from nonebot.adapters.onebot.v11 import Message, GroupMessageEvent, MessageSegment
 from nonebot.matcher import Matcher
-from nonebot.rule import to_me
+from nonebot.rule import to_me, is_type
 from nonebot_plugin_waiter import waiter
 
 from .config import config
 
+PICPATH = config.guesswho_picpath
+RETRIES = config.guesswho_max_retries
+
 
 async def game_process(
         matcher: Matcher,
-        event: Event,
+        event: GroupMessageEvent,
         game_type: str,
         tag: str
 ):
-    if isinstance(event, PrivateMessageEvent):
-        return
     group_id = event.get_session_id().split("_")[1]
     # user_id = event.get_session_id().split("_")[2]
     if controller.start(group_id):
@@ -34,8 +35,8 @@ async def game_process(
     msg += MessageSegment.text("\n120秒内@我发送你的答案(共有三次机会)\n@我发送[退出]以直接结束游戏")
     await matcher.send(msg)
 
-    @waiter(waits=["message"], block=True, rule=to_me(), keep_session=False)
-    async def listen(_event: Event):
+    @waiter(waits=["message"], block=True, rule=to_me() & is_type(GroupMessageEvent), keep_session=False)
+    async def listen(_event: GroupMessageEvent):
         if _event.get_session_id().split("_")[1] != group_id:
             return
         text = _event.get_message().extract_plain_text()
@@ -44,7 +45,7 @@ async def game_process(
         return text
 
     end_msg = Message() + MessageSegment.image(full_img)
-    async for resp in listen(timeout=120, retry=2, prompt=''):
+    async for resp in listen(timeout=120, retry=RETRIES-1, prompt=''):
         if resp is False:
             controller.end(group_id)
             end_msg += MessageSegment.text(f"游戏已取消!本题的答案是{names[0]}哦~")
@@ -74,7 +75,7 @@ def get_alpha_ratio(img: ImageFile):
 
 
 def get_randchar(group_id, game_type: str, tag: str = ''):
-    path = config.guesswho_picpath[game_type]
+    path = PICPATH[game_type]
     json_path = Path(__file__).parent / 'data' / (game_type + '_data.json')
     with open(json_path, 'r', encoding='utf-8') as file:
         data = json.load(file)
@@ -115,6 +116,8 @@ class Controller:
             return False
 
     def end(self, group_id):
+        cropped_img_path = Path(__file__).parent / 'data' / (group_id + '_tmp.png')
+        os.remove(cropped_img_path)
         self.status[group_id] = False
 
 

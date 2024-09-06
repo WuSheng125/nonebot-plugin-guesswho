@@ -1,5 +1,6 @@
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters, require
 from nonebot.plugin.on import on_command
+from nonebot.rule import is_type
 
 from .handler import *
 from .config import ConfigModel, config
@@ -26,16 +27,19 @@ if config.guesswho_azurlane_enabled:
     on_command(cmd="猜舰娘",
                block=True,
                priority=5,
+               rule=is_type(GroupMessageEvent),
                handlers=[azurlane_guess])
 
 if config.guesswho_arknights_enabled:
     on_command(cmd="猜干员",
                block=True,
                priority=5,
+               rule=is_type(GroupMessageEvent),
                handlers=[arknights_guess])
 
 if config.guesswho_bluearchive_enabled:
     on_command(cmd="猜学生",
                block=True,
                priority=5,
+               rule=is_type(GroupMessageEvent),
                handlers=[bluearchive_guess])
