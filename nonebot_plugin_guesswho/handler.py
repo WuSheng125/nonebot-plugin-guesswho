@@ -13,5 +13,5 @@ async def arknights_guess(matcher: Matcher, event: GroupMessageEvent, args: Mess
     await game_process(matcher, event, game_type='arknights', tag=args.extract_plain_text().strip())
 
 
-async def bluearchive_guess(matcher: Matcher, args: Message = CommandArg()):
-    pass
+async def bluearchive_guess(matcher: Matcher, event: GroupMessageEvent, args: Message = CommandArg()):
+    await game_process(matcher, event, game_type='bluearchive', tag=args.extract_plain_text().strip())

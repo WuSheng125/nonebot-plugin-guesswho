@@ -32,21 +32,26 @@ class Controller:
         if self.status.get(group_id):
             return -1
 
-        if self.time.get(user_id) is None:
-            self.time[user_id] = time
-            self.flag[user_id] = False
+        if self.time.get(group_id) is None:
+            self.time[group_id] = {user_id: time}
+            self.flag[group_id] = {user_id: False}
             return 0
 
-        cd = 600 - (time - self.time[user_id])
+        if self.time[group_id].get(user_id) is None:
+            self.time[group_id][user_id] = time
+            self.flag[group_id][user_id] = False
+            return 0
+
+        cd = COOLDOWN_TIME - (time - self.time[group_id][user_id])
         if cd <= 0:
-            self.time[user_id] = time
-            self.flag[user_id] = False
+            self.time[group_id][user_id] = time
+            self.flag[group_id][user_id] = False
             return 0
 
-        if self.flag[user_id]:
+        if self.flag[group_id][user_id]:
             return -2
         else:
-            self.flag[user_id] = True
+            self.flag[group_id][user_id] = True
             return int(cd)
 
 
