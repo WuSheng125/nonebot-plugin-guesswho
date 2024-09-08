@@ -57,12 +57,12 @@ async def game_process(
             return
         text = _event.get_message().extract_plain_text()
         if text == "退出":
-            return False, None
-        return text, _event.get_user_id()
+            return False
+        return [text, _event.get_user_id()]
 
     end_msg = Message() + MessageSegment.image(full_img)
     count = 0
-    async for resp, answer_id in listen(timeout=120, retry=RETRIES-1, prompt=''):
+    async for resp in listen(timeout=120, retry=RETRIES-1, prompt=''):
         count += 1
         if resp is False:
             controller.end(group_id)
@@ -72,6 +72,8 @@ async def game_process(
             controller.end(group_id)
             end_msg += MessageSegment.text(f"游戏已超时!本题的答案是{names[0]}哦~")
             await matcher.finish(end_msg)
+        answer_id = resp[1]
+        resp: str = resp[0]
         if resp in names:
             coin_add, coin_all = controller.end(group_id, answer_id)
             end_msg += MessageSegment.text("答对啦！恭喜")
