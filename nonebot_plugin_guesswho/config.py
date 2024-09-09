@@ -11,10 +11,12 @@ class ConfigModel(BaseModel):
     guesswho_cooldow: int = 600
     guesswho_max_retries: int = 3
     guesswho_coin_get: int = 10
-    guesswho_azurlane_enabled: bool = True
-    guesswho_arknights_enabled: bool = True
-    guesswho_bluearchive_enabled: bool = True
     guesswho_playerdata_path: Path = Path() / 'data' / 'nonebot_plugin_guesswho' / 'player_data.json'
+    guesswho_enabled: Dict = {
+        'azurlane': True,
+        'arknights': True,
+        'bluearchive': True
+    }
     guesswho_picpath: Dict = {
         'azurlane': Path() / 'data' / 'nonebot_plugin_guesswho' / 'azurlane',
         'arknights': Path() / 'data' / 'nonebot_plugin_guesswho' / 'arknights',
